@@ -8,7 +8,8 @@ include:
 install-postgresql-client:
   pkg.installed:
     - name: {{ postgres.pkg_client }}
-    - refresh: {{ postgres.use_upstream_repo }}
+    {# FIXME: Hardcoded False, should use postgres.use_upstream_repo #}
+    - refresh: False
 
 {% if postgres.pkg_libpq_dev != False %}
 install-postgres-libpq-dev:
