@@ -12,7 +12,9 @@ include:
 install-postgresql:
   pkg.installed:
     - name: {{ postgres.pkg }}
-    - refresh: {{ postgres.use_upstream_repo }}
+    # FIXME: This used to use {{ postgream.use_upstream }} but seemed to have
+    # issues. Testing by hardcoding.
+    - refresh: False
 
 {% if postgres.create_cluster != False %}
 create-postgresql-cluster:
