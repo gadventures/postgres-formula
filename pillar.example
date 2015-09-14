@@ -25,6 +25,15 @@ postgres:
       inherit: True
       replication: False
 
+  groups:
+    admin:
+      password: '98ruj923h4rf'
+      createdb: False
+      createroles: False
+      createuser: False
+      superuser: False
+      user: postgres
+
   # This section cover this ACL management of the pg_hba.conf file.
   # <type>, <database>, <user>, [host], <method>
   acls:

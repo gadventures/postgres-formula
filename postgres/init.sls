@@ -91,6 +91,20 @@ postgres-user-{{ name }}:
       - service: {{ postgres.service }}
 {% endfor%}
 
+{% for name, group in postgres.groups.items()  %}
+postgres-group-{{ name }}:
+  postgres_group.present:
+    - name: {{ name }}
+    - password: {{ group.get('password', 'changethis') }}
+    - createdb: {{ group.get('createdb', False) }}
+    - createroles: {{ group.get('createroles', False) }}
+    - createuser: {{ group.get('createuser', False) }}
+    - superuser: {{ group.get('superuser', False) }}
+    - user: {{ group.get('user', 'postgres') }}
+    - require:
+      - service: {{ postgres.service }}
+{% endfor%}
+
 {% for name, db in postgres.databases.items()  %}
 postgres-db-{{ name }}:
   postgres_database.present:
