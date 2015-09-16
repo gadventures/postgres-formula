@@ -64,14 +64,12 @@ postgresql-conf:
 
 {% if postgres.recoveryconf %}
 pg-recovery-conf:
-  file.blockreplace:
+  file.managed:
     - name: {{ postgres.conf_dir }}/recovery.conf
-    - marker_start: "# Managed by SaltStack: please do not edit"
-    - marker_end: "# Managed by SaltStack: end of salt managed zone --"
-    - content: |
+    - contents: |
+        # Managed by SaltStack: please do not edit
         {{ postgres.recoveryconf|indent(8) }}
-    - show_changes: True
-    - append_if_not_found: True
+        # Managed by SaltStack: end of salt managed zone --
     - watch_in:
        - service: postgresql
 {% endif %}
