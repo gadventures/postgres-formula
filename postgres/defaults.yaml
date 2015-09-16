@@ -17,4 +17,5 @@ postgres:
   databases: {}
   tablespaces: {}
   postgresconf: ""
+  recoveryconf: ""
   pg_hba.conf: salt://postgres/pg_hba.conf

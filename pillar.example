@@ -63,3 +63,8 @@ postgres:
   postgresconf: |
     listen_addresses = 'localhost,*'
 
+  # Empty by default, this will create a recovery.conf file for
+  # slave databases
+  recoverconf: |
+    standby_mode = 'on' # enables stand-by (readonly) mode.
+    primary_conninfo = 'host=MASTER_SERVER port=MASTER_SERVER_PORT user=REPLICATION_USER'

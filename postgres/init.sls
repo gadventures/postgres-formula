@@ -62,6 +62,20 @@ postgresql-conf:
        - service: postgresql
 {% endif %}
 
+{% if postgres.recoveryconf %}
+pg-recovery-conf:
+  file.blockreplace:
+    - name: {{ postgres.conf_dir }}/recovery.conf
+    - marker_start: "# Managed by SaltStack: please do not edit"
+    - marker_end: "# Managed by SaltStack: end of salt managed zone --"
+    - content: |
+        {{ postgres.recoveryconf|indent(8) }}
+    - show_changes: True
+    - append_if_not_found: True
+    - watch_in:
+       - service: postgresql
+{% endif %}
+
 pg_hba.conf:
   file.managed:
     - name: {{ postgres.conf_dir }}/pg_hba.conf
